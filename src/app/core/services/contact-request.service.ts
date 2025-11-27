@@ -2,14 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ContactRequest } from '../models/contact-request.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ContactRequestService {
-
-  private apiUrl = "http://localhost:8080/api/v1/contact-requests";
+  private apiUrl = environment.apiUrlContactRequests;
   private _http = inject(HttpClient);
 
   getAllContactRequests(): Observable<ContactRequest[]> {

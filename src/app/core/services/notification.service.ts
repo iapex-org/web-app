@@ -2,13 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Notification } from '../models/notification.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
-
-  private apiUrl = "http://localhost:8080/api/v1/notifications";
+  private apiUrl = environment.apiUrlNotifications;
   private _http = inject(HttpClient);
 
   // Obtener todas las notificaciones con paginación y filtro opcional

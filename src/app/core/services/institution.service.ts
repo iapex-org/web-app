@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Institution } from '../models/institution.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class InstitutionService {
-
-  private apiUrl = "http://localhost:8080/api/v1/institutions";
+  private apiUrl = environment.apiUrlInstitutions;
   private _http = inject(HttpClient);
 
   public getAllInstitutions(): Observable<any> {
@@ -20,9 +19,12 @@ export class InstitutionService {
   public getInstitution(id: number): Observable<Institution> {
     const apiUrl = `${this.apiUrl}/${id}`;
     return this._http.get<Institution>(apiUrl).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('Error al obtener la institución:', error);
-        return throwError(() => new Error(error.error?.message || 'Error al obtener la institución'));
+        return throwError(
+          () =>
+            new Error(error.error?.message || 'Error al obtener la institución')
+        );
       })
     );
   }
@@ -35,7 +37,7 @@ export class InstitutionService {
   public updateInstitution(id: number, formData: FormData): Observable<any> {
     return this._http.put(`${this.apiUrl}/${id}`, formData, {
       reportProgress: true,
-      observe: 'events'
+      observe: 'events',
     });
   }
 
@@ -49,9 +51,18 @@ export class InstitutionService {
   public getAllInstitutionNames(): Observable<string[]> {
     const apiUrl = `${this.apiUrl}/institution-names`;
     return this._http.get<string[]>(apiUrl).pipe(
-      catchError(error => {
-        console.error('Error al obtener los nombres de las instituciones:', error);
-        return throwError(() => new Error(error.error?.message || 'Error al obtener los nombres de las instituciones'));
+      catchError((error) => {
+        console.error(
+          'Error al obtener los nombres de las instituciones:',
+          error
+        );
+        return throwError(
+          () =>
+            new Error(
+              error.error?.message ||
+                'Error al obtener los nombres de las instituciones'
+            )
+        );
       })
     );
   }

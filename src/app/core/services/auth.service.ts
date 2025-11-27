@@ -5,52 +5,54 @@ import { Router } from '@angular/router';
 import { AuthResponse, AuthUser } from '../models/auth.model';
 import { UserService } from './user.service';
 import { RoleName } from '../models/role.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private readonly AUTH_KEY = 'auth_user';
-  private readonly TOKEN_DURATION = 10 * 60 * 1000; // 10 minutes
-  private apiUrl = 'http://localhost:8080/api/v1/users/web';
-  
+  private readonly AUTH_KEY = environment.authKey;
+  private readonly TOKEN_DURATION = Number(environment.tokenDuration);
+  private apiUrl = environment.apiUrlUsersWeb;
+
   private _http = inject(HttpClient);
-  private _router = inject(Router); 
+  private _router = inject(Router);
   private _userService = inject(UserService);
 
   login(email: string, password: string): Observable<AuthResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = JSON.stringify({ email, password });
 
-    return this._http.post<AuthResponse>(`${this.apiUrl}/login`, body, { headers })
+    return this._http
+      .post<AuthResponse>(`${this.apiUrl}/login`, body, { headers })
       .pipe(
-        tap(response => {
+        tap((response) => {
           if (!response?.token) {
             throw new Error('Invalid login response');
           }
-          
+
           const authUser: AuthUser = {
             token: response.token,
             role: response.authorities?.[0]?.authority || 'USER_WEB',
-            expiresAt: new Date().getTime() + this.TOKEN_DURATION
+            expiresAt: new Date().getTime() + this.TOKEN_DURATION,
           };
-          
+
           this.setAuthUser(authUser);
         }),
-        catchError(error => {
-                if (error.status === 442) {
-                    // Lógica para enviar el correo
-                    this._userService.requestVerifyEmail(email).subscribe();
-                }
-                return throwError(() => error);
-            })
+        catchError((error) => {
+          if (error.status === 442) {
+            // Lógica para enviar el correo
+            this._userService.requestVerifyEmail(email).subscribe();
+          }
+          return throwError(() => error);
+        })
       );
   }
 
   getAuthUser(): AuthUser | null {
     const userData = localStorage.getItem(this.AUTH_KEY);
     if (!userData) return null;
-    
+
     try {
       const authUser: AuthUser = JSON.parse(userData);
       if (this.isTokenExpired(authUser.expiresAt)) {
@@ -67,7 +69,7 @@ export class AuthService {
   getRole(): RoleName {
     const authUser = this.getAuthUser();
     return authUser?.role as RoleName;
-  }  
+  }
 
   getAuthToken(): string | null {
     const authUser = this.getAuthUser();
@@ -93,7 +95,8 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('auth_user') || sessionStorage.getItem('auth_user');
+    const token =
+      localStorage.getItem('auth_user') || sessionStorage.getItem('auth_user');
     return !!token;
   }
 

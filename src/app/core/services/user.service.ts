@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/v1/users/web';
+  private apiUrl = environment.apiUrlUsersWeb;
   private _http = inject(HttpClient);
 
   verifyEmail(code: string): Observable<any> {
@@ -17,7 +17,9 @@ export class UserService {
 
   requestVerifyEmail(email: string): Observable<any> {
     let params = new HttpParams().set('email', email);
-    return this._http.get<any>(`${this.apiUrl}/verify-email/request`, { params });
+    return this._http.get<any>(`${this.apiUrl}/verify-email/request`, {
+      params,
+    });
   }
 
   registerUser(user: any): Observable<any> {
@@ -26,10 +28,15 @@ export class UserService {
 
   requestPasswordReset(email: string): Observable<any> {
     let params = new HttpParams().set('email', email);
-    return this._http.post<any>(`${this.apiUrl}/password-reset/request`, null, { params });
+    return this._http.post<any>(`${this.apiUrl}/password-reset/request`, null, {
+      params,
+    });
   }
 
-  resetPassword(request: { verificationCode: string, newPassword: string }): Observable<any> {
+  resetPassword(request: {
+    verificationCode: string;
+    newPassword: string;
+  }): Observable<any> {
     return this._http.post<any>(`${this.apiUrl}/password-reset`, request);
   }
 }
