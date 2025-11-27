@@ -1,49 +1,48 @@
-# IAPEX - Aplicación móvil
+# IAPEX - Aplicación web institucional
 
-Aplicación móvil para la localización de pacientes extraviados en instituciones de salud mediante búsqueda híbrida con inteligencia artificial.
+Aplicación web para la gestión y localización de pacientes extraviados en instituciones de salud, integrando búsqueda híbrida con inteligencia artificial.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18.x-blue?logo=react" alt="React version">
-  <img src="https://img.shields.io/badge/Ionic-8.x-blue?logo=ionic" alt="Ionic version">
+  <img src="https://img.shields.io/badge/Angular-18.x-DD0031?logo=angular" alt="Angular version">
   <img src="https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript" alt="TypeScript version">
   <img src="https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite" alt="Vite version">
 </p>
 
 ## 🏥 ¿Qué es IAPEX?
 
-**IAPEX** (_Inteligencia Artificial para la Localización de Pacientes Extraviados en Instituciones de Salud_) es un sistema validado y robusto para la identificación de pacientes no localizados o no identificados en instituciones de salud.
+**IAPEX** (_Inteligencia Artificial para la Localización de Pacientes Extraviados en Instituciones de Salud_) es un sistema validado y robusto para la identificación y gestión de pacientes no localizados o no identificados en instituciones de salud.
 
 ### Componentes del ecosistema
 
+- **App web** (este repositorio): gestión institucional y para personal de salud
 - **App móvil**: búsqueda rápida de pacientes desde dispositivos móviles
-- **App web**: gestión institucional y para personal de salud
 - **API REST (Spring Boot)**: backend principal, autenticación y seguridad
 - **API de búsqueda (FastAPI)**: motor de IA y búsqueda híbrida
 
-La app móvil permite realizar búsquedas combinando **reconocimiento facial** y **descripción textual** del paciente, mostrando resultados ordenados por porcentaje de similitud.
+La app web permite la gestión de usuarios, pacientes, instituciones, membresías, notificaciones y solicitudes de contacto, integrando la búsqueda híbrida y el reconocimiento facial.
 
 ---
 
 ## ✨ Funcionalidades
 
-- 🔍 **Búsqueda híbrida**: combina reconocimiento facial (75%) y análisis textual (25%)
-- 📸 **Reconocimiento facial**: identifica pacientes mediante CNN basada en dlib
-- 📝 **Búsqueda textual**: algoritmos Levenshtein y Jaro-Winkler para coincidencias
-- 📊 **Resultados ordenados**: porcentaje de similitud en cada coincidencia
-- 🏥 **Contacto institucional**: solicita información de pacientes encontrados
-- 🔒 **Datos seguros**: autenticación JWT y encriptación completa
+- 🏥 **Gestión de pacientes e instituciones**
+- 🔍 **Búsqueda híbrida**: combina reconocimiento facial y análisis textual
+- 📧 **Notificaciones institucionales**
+- 📦 **Carga y gestión de archivos**
+- 🔒 **Autenticación y autorización** (JWT, roles, usuarios)
+- 📊 **Resultados ordenados** por porcentaje de similitud
+- 📝 **Documentación interactiva** y ayuda en línea
 
 ---
 
 ## 🛠 Tecnologías
 
-- **React** con TypeScript
-- **Ionic Framework** para componentes móviles
+- **Angular** (v18+)
+- **TypeScript** (v5+)
 - **Vite** como build tool
-- **Capacitor** para funcionalidades nativas
-- **Axios** para comunicación con APIs
-- **React Hook Form** para gestión de formularios
-- **Context API** para estado global
+- **Bootstrap** para UI
+- **RxJS** para manejo reactivo
+- **Jest/Karma** para pruebas
 
 ---
 
@@ -59,8 +58,8 @@ La app móvil permite realizar búsquedas combinando **reconocimiento facial** y
 1. **Clonar repositorio**
 
 ```bash
-git clone https://github.com/aescobar80/IAPEX-MOBILE-APP.git
-cd IAPEX-MOBILE-APP
+git clone https://github.com/aescobar80/IAPEX_APP-WEB.git
+cd IAPEX_APP-WEB
 ```
 
 2. **Instalar dependencias**
@@ -82,34 +81,23 @@ cp .env.example .env
 Configura tus valores en .env:
 
 ```env
-# API REST - Backend principal (Spring Boot)
-VITE_API_REST_BASE_URL=http://localhost:8080/api/v1
-
-# API SEARCH - Backend de búsqueda (FastAPI)
-VITE_API_SEARCH_BASE_URL=http://localhost:8000/api/v1
+API_URL_USERS_WEB=http://localhost:8080/api/v1/users/web
+API_URL_PATIENTS=http://localhost:8080/api/v1/patients
+API_URL_INSTITUTIONS=http://localhost:8080/api/v1/institutions
+API_URL_CONTACT_REQUESTS=http://localhost:8080/api/v1/contact-requests
+API_URL_MEMBERSHIPS=http://localhost:8080/api/v1/memberships
+API_URL_NOTIFICATIONS=http://localhost:8080/api/v1/notifications
+TOKEN_DURATION=600000
+AUTH_KEY=auth_user
 ```
 
 4. **Ejecutar en modo desarrollo**
 
 ```bash
-npm run dev
+npm start
 ```
 
-La aplicación estará disponible en `http://localhost:5173`
-
-### 📱 Compilar para móvil
-
-```bash
-# Sincronizar con Capacitor
-npm run build
-npx cap sync
-
-# Abrir en Android Studio
-npx cap open android
-
-# Abrir en Xcode (macOS)
-npx cap open ios
-```
+La aplicación estará disponible en `http://localhost:4200`
 
 ---
 
@@ -120,7 +108,7 @@ IAPEX está compuesto por múltiples repositorios especializados que conforman u
 | Repositorio                                                            | Propósito                 | Tecnología                | Estado       |
 | ---------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------ |
 | **[IAPEX-MOBILE-APP](https://github.com/aescobar80/IAPEX-MOBILE-APP)** | App móvil para búsqueda   | React + Ionic + Capacitor | ✅ Operativo |
-| **[IAPEX_APP-WEB](https://github.com/aescobar80/IAPEX_APP-WEB)**       | App web institucional     | React + Vite              | ✅ Operativo |
+| **[IAPEX_APP-WEB](https://github.com/aescobar80/IAPEX_APP-WEB)**       | App web institucional     | Angular + Vite            | ✅ Operativo |
 | **[API-REST-IAPEX](https://github.com/aescobar80/API-REST-IAPEX)**     | API principal y seguridad | Spring Boot + PostgreSQL  | ✅ Operativo |
 | **[API-SEARCH-IAPEX](https://github.com/misraelDev/API-SEARCH-IAPEX)** | Motor de IA y búsqueda    | FastAPI + dlib + MongoDB  | ✅ Operativo |
 
@@ -128,7 +116,7 @@ IAPEX está compuesto por múltiples repositorios especializados que conforman u
 
 ## 🤝 Colaboración interna
 
-Seguimos convenciones específicas para mantener consistencia - consulta [CONTRIBUTING.MD](CONTRIBUTING.MD).
+Seguimos convenciones específicas para mantener consistencia - consulta CONTRIBUTING.MD.
 
 ## 🤝 Reconocimientos
 
