@@ -7,5 +7,5 @@ export const environment = {
   tokenDuration: process.env['TOKEN_DURATION'] || '',
   authKey: process.env['AUTH_KEY'] || '',
   apiUrlMemberships: '',
-  apiUrlNotifications: ''
+  apiUrlNotifications: '',
 };
