@@ -1,6 +1,7 @@
 {
-  "name": "iapex-app-web",
+  "name": "iapex-web-app",
   "version": "0.0.0",
+  "description": "Secure web portal for hospital staff to register, search, and manage unidentified patients using hybrid AI matching.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -32,7 +33,6 @@
     "filepond-plugin-file-encode": "^2.1.14",
     "filepond-plugin-file-validate-type": "^1.2.9",
     "filepond-plugin-image-preview": "^4.6.12",
-    "iapex-app-web": "file:",
     "jquery": "^3.7.1",
     "ngx-bootstrap": "^18.0.2",
     "ngx-filepond": "^7.0.3",

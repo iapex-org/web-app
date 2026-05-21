@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: IAPEX Security
+    url: https://github.com/iapex-org/web-app/security/policy
+    about: Report a security vulnerability

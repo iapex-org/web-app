@@ -1,84 +1,80 @@
-# IAPEX - Aplicación web institucional
-
-Aplicación web para la gestión y localización de pacientes extraviados en instituciones de salud, integrando búsqueda híbrida con inteligencia artificial.
+# IAPEX — Institutional Web Portal
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Angular-18.x-DD0031?logo=angular" alt="Angular version">
-  <img src="https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript" alt="TypeScript version">
-  <img src="https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite" alt="Vite version">
+  <img src="https://img.shields.io/badge/Angular-19.x-DD0031?logo=angular&logoColor=white" alt="Angular">
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite&logoColor=white" alt="Vite">
 </p>
 
-## 🏥 ¿Qué es IAPEX?
+<p align="center">
+  <em>Secure web portal for hospital staff to register, search, and manage unidentified patients using hybrid AI matching.</em>
+</p>
 
-**IAPEX** (_Inteligencia Artificial para la Localización de Pacientes Extraviados en Instituciones de Salud_) es un sistema validado y robusto para la identificación y gestión de pacientes no localizados o no identificados en instituciones de salud.
-
-### Componentes del ecosistema
-
-- **App web** (este repositorio): gestión institucional y para personal de salud
-- **App móvil**: búsqueda rápida de pacientes desde dispositivos móviles
-- **API REST (Spring Boot)**: backend principal, autenticación y seguridad
-- **API de búsqueda (FastAPI)**: motor de IA y búsqueda híbrida
-
-La app web permite la gestión de usuarios, pacientes, instituciones, membresías, notificaciones y solicitudes de contacto, integrando la búsqueda híbrida y el reconocimiento facial.
-
----
-
-## ✨ Funcionalidades
-
-- 🏥 **Gestión de pacientes e instituciones**
-- 🔍 **Búsqueda híbrida**: combina reconocimiento facial y análisis textual
-- 📧 **Notificaciones institucionales**
-- 📦 **Carga y gestión de archivos**
-- 🔒 **Autenticación y autorización** (JWT, roles, usuarios)
-- 📊 **Resultados ordenados** por porcentaje de similitud
-- 📝 **Documentación interactiva** y ayuda en línea
+<p align="center">
+  <a href="https://github.com/iapex-org/web-app">Repository</a>
+  ·
+  <a href="https://github.com/iapex-org/web-app/issues">Report Bug</a>
+  ·
+  <a href="https://virtual.cuautitlan.unam.mx/intar/wp-content/uploads/sites/19/2025/12/166-A-Hybrid-Artificial-Intelligent-System-for-Missing-JORGE-CHRISTIAN-SERRANO-PUERTOS.pdf">Research Paper</a>
+</p>
 
 ---
 
-## 🛠 Tecnologías
+## About IAPEX
 
-- **Angular** (v18+)
-- **TypeScript** (v5+)
-- **Vite** como build tool
-- **Bootstrap** para UI
-- **RxJS** para manejo reactivo
-- **Jest/Karma** para pruebas
+**IAPEX** (Hybrid AI for Missing Patient Identification) is a validated system that helps healthcare institutions identify and manage unidentified or missing patients through a fusion of facial recognition and textual analysis.
 
----
+This repository contains the **Institutional Web Portal** — a secure Angular application for medical staff to:
 
-## ⚡ Instalación rápida
+- Register unidentified patients with morphological traits and photographs
+- Manage patient records, institutions, and memberships
+- Search and view potential matches with similarity scores
+- Process contact requests from families
+- Send institutional notifications
+- Upload and manage media files
 
-### Prerrequisitos
+### Ecosystem
 
-- **Node.js** (v18 o superior)
-- **npm** o **yarn**
+| Component | Repository | Stack |
+|-----------|-----------|-------|
+| **Web Portal** (this) | [iapex-org/web-app](https://github.com/iapex-org/web-app) | Angular 19, Bootstrap, TypeScript |
+| **Mobile App** | [iapex-org/mobile-app](https://github.com/iapex-org/mobile-app) | React 18, Ionic 8, Capacitor |
+| **Core API** | [iapex-org/core-api](https://github.com/iapex-org/core-api) | Spring Boot 3, PostgreSQL, MongoDB |
 
-### Pasos
+## Features
 
-1. **Clonar repositorio**
+- **Patient Management** — Register, update, and search unidentified patients
+- **Institution Management** — Manage healthcare institution profiles
+- **Hybrid Search** — Facial recognition + textual description matching
+- **RBAC Security** — Role-Based Access Control with JWT authentication
+- **Notifications** — Institutional email notifications
+- **Media Upload** — Image and file management with FilePond
+- **QR Codes** — Patient QR generation for quick referencing
+- **Interactive Dashboard** — Charts and statistics with amCharts
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Setup
 
 ```bash
-git clone https://github.com/aescobar80/IAPEX_APP-WEB.git
-cd IAPEX_APP-WEB
-```
-
-2. **Instalar dependencias**
-
-```bash
+git clone https://github.com/iapex-org/web-app.git
+cd web-app
 npm install
 ```
 
-3. **Configurar variables de entorno**
-
-⚠️ **IMPORTANTE:** Las variables de entorno son **OBLIGATORIAS**. La aplicación no funcionará sin ellas.
-
-Copia el archivo de ejemplo:
+Create a `.env` file from the example:
 
 ```bash
 cp .env.example .env
 ```
 
-Configura tus valores en .env:
+Configure your environment variables:
 
 ```env
 API_URL_USERS_WEB=http://localhost:8080/api/v1/users/web
@@ -91,45 +87,53 @@ TOKEN_DURATION=600000
 AUTH_KEY=auth_user
 ```
 
-4. **Ejecutar en modo desarrollo**
+Run the development server:
 
 ```bash
 npm start
 ```
 
-La aplicación estará disponible en `http://localhost:4200`
+The app will be available at `http://localhost:4200`
 
----
+## Architecture
 
-## 🏗 Ecosistema IAPEX: arquitectura de microservicios
+```
+┌─────────────────────────────────────────────┐
+│              Web Portal (Angular)            │
+│  ┌─────────┐ ┌──────────┐ ┌──────────────┐ │
+│  │  Auth   │ │ Patients │ │ Institutions │ │
+│  │ Module  │ │  Module  │ │   Module     │ │
+│  └────┬────┘ └────┬─────┘ └──────┬───────┘ │
+│       │           │              │          │
+│  ┌────▼───────────▼──────────────▼───────┐  │
+│  │         HTTP Services (Axios)         │  │
+│  └────────────────┬──────────────────────┘  │
+└───────────────────┼────────────────────────┘
+                    │ JWT Auth
+┌───────────────────┼────────────────────────┐
+│      Core API (Spring Boot)                │
+│   /api/v1/users, /api/v1/patients, ...     │
+└────────────────────────────────────────────┘
+```
 
-IAPEX está compuesto por múltiples repositorios especializados que conforman una arquitectura moderna y escalable:
+## Contributing
 
-| Repositorio                                                            | Propósito                 | Tecnología                | Estado       |
-| ---------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------ |
-| **[IAPEX-MOBILE-APP](https://github.com/aescobar80/IAPEX-MOBILE-APP)** | App móvil para búsqueda   | React + Ionic + Capacitor | ✅ Operativo |
-| **[IAPEX_APP-WEB](https://github.com/aescobar80/IAPEX_APP-WEB)**       | App web institucional     | Angular + Vite            | ✅ Operativo |
-| **[API-REST-IAPEX](https://github.com/aescobar80/API-REST-IAPEX)**     | API principal y seguridad | Spring Boot + PostgreSQL  | ✅ Operativo |
-| **[API-SEARCH-IAPEX](https://github.com/misraelDev/API-SEARCH-IAPEX)** | Motor de IA y búsqueda    | FastAPI + dlib + MongoDB  | ✅ Operativo |
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for our branch naming, commit conventions, and PR workflow.
 
----
+## License
 
-## 🤝 Colaboración interna
+This project is licensed under the GNU General Public License v3.0 — see the [LICENSE](LICENSE) file for details.
 
-Seguimos convenciones específicas para mantener consistencia - consulta CONTRIBUTING.MD.
+## Acknowledgments
 
-## 🤝 Reconocimientos
-
-Este proyecto fue desarrollado por el equipo de autores:
-
+**Authors:**
 - Florentino Altamirano Misrael
 - Ortiz Pérez Alejandro
 - Serrano Puertos Jorge Christian
 
-Con la asesoría y guía conceptual de:
-
+**Advisor:**
 - Escobar García Arturo
 
-Y con el apoyo académico de la
-
+**Academic Support:**
 - Universidad Tecnológica del Centro de Veracruz
+- UNAM Cuautitlán
