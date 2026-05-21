@@ -57,7 +57,7 @@ Este repositorio contiene el **Portal Web Institucional** — una aplicación An
 - **Códigos QR** — Generación de QR para referencia rápida de pacientes
 - **Dashboard Interactivo** — Gráficos y estadísticas con amCharts
 
-## Inicio Rápido
+## Inicio rápido
 
 ### Prerrequisitos
 
@@ -98,6 +98,27 @@ npm start
 ```
 
 La aplicación estará disponible en `http://localhost:4200`
+
+## Arquitectura
+
+```
+┌─────────────────────────────────────────────┐
+│              Web Portal (Angular)            │
+│  ┌─────────┐ ┌──────────┐ ┌──────────────┐ │
+│  │  Auth   │ │ Patients │ │ Institutions │ │
+│  │ Module  │ │  Module  │ │   Module     │ │
+│  └────┬────┘ └────┬─────┘ └──────┬───────┘ │
+│       │           │              │          │
+│  ┌────▼───────────▼──────────────▼───────┐  │
+│  │         HTTP Services (Axios)         │  │
+│  └────────────────┬──────────────────────┘  │
+└───────────────────┼────────────────────────┘
+                    │ JWT Auth
+┌───────────────────┼────────────────────────┐
+│      Core API (Spring Boot)                │
+│   /api/v1/users, /api/v1/patients, ...     │
+└────────────────────────────────────────────┘
+```
 
 ## Contribuciones
 
